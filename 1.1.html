@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/strict.dtd">
+<html>
+<head>
+<META http-equiv=Content-Type content="text/html; charset=UTF-8">
+<title>Exported from Notepad++</title>
+<style type="text/css">
+span {
+	font-family: 'Consolas';
+	font-size: 10pt;
+	color: #5F5F00;
+}
+.sc0 {
+}
+.sc1 {
+	color: #005F5F;
+}
+.sc2 {
+	color: #005F00;
+}
+.sc5 {
+	color: #005F5F;
+}
+.sc10 {
+	color: #AF0000;
+}
+.sc12 {
+	color: #005F00;
+}
+</style>
+</head>
+<body>
+<div style="float: left; white-space: pre; line-height: 1; background: #D7D7AF; "><span class="sc5">-===============================================================================</span><span class="sc0">
+</span><span class="sc2">1</span><span class="sc12">.</span><span class="sc0">数据采集
+  </span><span class="sc5">@</span><span class="sc10">F_P1Type</span><span class="sc5">=</span><span class="sc1">'前柱'</span><span class="sc0">
+  set </span><span class="sc5">@</span><span class="sc10">QZHU</span><span class="sc5">=@</span><span class="sc10">F_FirstChannelBore</span><span class="sc12">;</span><span class="sc0">      
+  set </span><span class="sc5">@</span><span class="sc10">QZHUKN</span><span class="sc5">=</span><span class="sc0">isnull</span><span class="sc12">(((</span><span class="sc10">PI</span><span class="sc12">()</span><span class="sc5">*@</span><span class="sc10">TDGJ1</span><span class="sc5">*@</span><span class="sc10">TDGJ1</span><span class="sc5">*@</span><span class="sc10">F_FirstChannelBore</span><span class="sc12">)</span><span class="sc5">/</span><span class="sc2">4</span><span class="sc12">)</span><span class="sc5">/</span><span class="sc2">1000</span><span class="sc5">,</span><span class="sc2">0</span><span class="sc12">)</span><span class="sc5">*</span><span class="sc2">2</span><span class="sc0">  
+
+</span><span class="sc5">-===============================================================================</span><span class="sc0">  
+</span><span class="sc2">2</span><span class="sc12">.</span><span class="sc0">进行判断
+  </span><span class="sc2">2.1</span><span class="sc0">传感器在单循环表中没有记录
+  </span><span class="sc2">2.2</span><span class="sc0">并且第一通道值小于压力零值①
+  注：①压力零值：在系统中设置压力零值，做为循环的起点。
+  如果正确：表示循环还未开始
+  如果不是：表示循环开始进入下个判断
+  
+  
+  （</span><span class="sc2">1</span><span class="sc0">）单循环表</span><span class="sc10">TCompreCollectResistanceCycle1</span><span class="sc0">
+  （</span><span class="sc2">2</span><span class="sc0">）条件
+         </span><span class="sc12">(</span><span class="sc0">
+         count</span><span class="sc12">(</span><span class="sc5">*</span><span class="sc12">)</span><span class="sc0"> 
+         </span><span class="sc10">F_CompreCollectCode</span><span class="sc5">=@</span><span class="sc10">F_CompreCollectCode</span><span class="sc0"> 
+         and  </span><span class="sc10">F_StationCode</span><span class="sc0"> </span><span class="sc5">=@</span><span class="sc10">F_StationCode</span><span class="sc0">
+         </span><span class="sc12">)</span><span class="sc0">
+         </span><span class="sc5">=</span><span class="sc2">0</span><span class="sc0"> 
+         and </span><span class="sc5">@</span><span class="sc10">F_FirstChannelBore</span><span class="sc5">&lt;=@</span><span class="sc10">F_PressureZero</span><span class="sc0">
+         
+</span><span class="sc5">-===============================================================================</span><span class="sc0">         
+    </span><span class="sc2">2</span><span class="sc10">Y</span><span class="sc12">.</span><span class="sc0">执行插入操作
+       （</span><span class="sc2">1</span><span class="sc0">）表  ：</span><span class="sc10">TCompreCollectResistanceCycle1</span><span class="sc0">
+       （</span><span class="sc2">2</span><span class="sc0">）字段：</span><span class="sc10">F_StationCode</span><span class="sc0">    
+                  </span><span class="sc10">F_CompreCollectCode</span><span class="sc0">
+                  </span><span class="sc10">F_FirstChannelBore</span><span class="sc0">
+                  </span><span class="sc10">F_CollectDatetime</span><span class="sc0"> 
+       
+</span><span class="sc5">-===============================================================================</span><span class="sc0">    
+    </span><span class="sc2">2</span><span class="sc10">N</span><span class="sc12">.</span><span class="sc0">进行判断
+       </span><span class="sc2">2</span><span class="sc10">N1</span><span class="sc12">.</span><span class="sc0">前柱值大于压力零值
+       如果正确：表示记录这条数据为循环过程中的一条数据
+       如果不是：表示循环位于结束状态进入下个判断
+       
+</span><span class="sc5">-===============================================================================</span><span class="sc0">    
+                </span><span class="sc2">2</span><span class="sc10">NY</span><span class="sc12">.</span><span class="sc0">执行插入操作
+                （</span><span class="sc2">1</span><span class="sc0">）表  ：</span><span class="sc10">TCompreCollectResistanceCycle1</span><span class="sc0">
+                （</span><span class="sc2">2</span><span class="sc0">）字段：</span><span class="sc10">F_StationCode</span><span class="sc0">    
+                           </span><span class="sc10">F_CompreCollectCode</span><span class="sc0">
+                           </span><span class="sc10">F_FirstChannelBore</span><span class="sc0">
+                           </span><span class="sc10">F_CollectDatetime</span><span class="sc0"> 
+                           
+</span><span class="sc5">-===============================================================================</span><span class="sc0">    
+                </span><span class="sc2">2</span><span class="sc10">NN</span><span class="sc12">.</span><span class="sc0">进行判断
+                    </span><span class="sc2">2</span><span class="sc10">NN1</span><span class="sc0">循环开始三分钟后有数据
+                         </span><span class="sc10">F_CollectDatetime</span><span class="sc5">&gt;</span><span class="sc0">
+                         </span><span class="sc12">(</span><span class="sc0">select dateadd</span><span class="sc12">(</span><span class="sc0">minute</span><span class="sc5">,</span><span class="sc2">3</span><span class="sc5">,</span><span class="sc0">min</span><span class="sc12">(</span><span class="sc10">F_CollectDatetime</span><span class="sc12">))</span><span class="sc0">
+                    如果正确：表示循环已经结束，插入相关值
+                    如果不是：表示此循环有问题，删除原数据，并插入新循环              
+     
+</span><span class="sc5">-===============================================================================</span><span class="sc0">    
+                            </span><span class="sc2">2</span><span class="sc10">NNY</span><span class="sc12">.</span><span class="sc0">执行插入操作
+                                 （</span><span class="sc2">1</span><span class="sc0">）表：</span><span class="sc10">TCompreCollectResistanceStatistics1</span><span class="sc0">
+                                 （</span><span class="sc2">2</span><span class="sc0">）数据：</span><span class="sc10">F_DataType</span><span class="sc0"> </span><span class="sc5">=</span><span class="sc0"> </span><span class="sc2">0</span><span class="sc0"> 单位：</span><span class="sc10">KN</span><span class="sc0">
+                                            </span><span class="sc10">F_DataType</span><span class="sc0"> </span><span class="sc5">=</span><span class="sc0"> </span><span class="sc2">1</span><span class="sc0"> 单位：</span><span class="sc10">Mpa</span><span class="sc0">
+</span><span class="sc5">-===============================================================================</span><span class="sc0">    
+                            </span><span class="sc2">2</span><span class="sc10">NNN</span><span class="sc12">.</span><span class="sc0">废循环删除记录
+                                 （</span><span class="sc2">1</span><span class="sc0">）表：</span><span class="sc10">TCompreCollectResistanceCycle1</span><span class="sc0">
+                                 （</span><span class="sc2">2</span><span class="sc0">）操作：delete
+                                            insert
+                                            
+
+
+</span><span class="sc5">--==============================================================================</span><span class="sc0">
+</span><span class="sc5">--==============================================================================</span><span class="sc0">                                            
+                                            
+</span><span class="sc5">--</span><span class="sc0">计算某个传感器的单循环的初撑力</span><span class="sc12">(</span><span class="sc10">KN</span><span class="sc12">)</span><span class="sc0">   
+</span><span class="sc5">--============================@</span><span class="sc10">CCL1</span><span class="sc0">
+select top </span><span class="sc2">1</span><span class="sc0"> 
+    </span><span class="sc5">@</span><span class="sc10">CCL1</span><span class="sc5">=</span><span class="sc0">isnull</span><span class="sc12">((</span><span class="sc10">PI</span><span class="sc12">()</span><span class="sc5">*@</span><span class="sc10">TDGJ1</span><span class="sc5">*@</span><span class="sc10">TDGJ1</span><span class="sc5">*</span><span class="sc10">F_FirstChannelBore</span><span class="sc5">/</span><span class="sc2">4</span><span class="sc12">)</span><span class="sc5">/</span><span class="sc2">1000</span><span class="sc5">,</span><span class="sc2">0</span><span class="sc12">)</span><span class="sc0">     
+from </span><span class="sc10">TCompreCollectResistanceCycle1</span><span class="sc0">      
+    where </span><span class="sc10">F_CompreCollectCode</span><span class="sc5">=@</span><span class="sc10">F_CompreCollectCode</span><span class="sc0"> 
+    and  </span><span class="sc10">F_StationCode</span><span class="sc5">=@</span><span class="sc10">F_StationCode</span><span class="sc0">      
+    and </span><span class="sc10">F_CollectDatetime</span><span class="sc5">&gt;</span><span class="sc0">
+        </span><span class="sc12">(</span><span class="sc0">select dateadd</span><span class="sc12">(</span><span class="sc0">minute</span><span class="sc5">,</span><span class="sc2">3</span><span class="sc5">,</span><span class="sc0">min</span><span class="sc12">(</span><span class="sc10">F_CollectDatetime</span><span class="sc12">))</span><span class="sc0">      
+        from </span><span class="sc10">TCompreCollectResistanceCycle1</span><span class="sc0">      
+            where </span><span class="sc10">F_CompreCollectCode</span><span class="sc5">=@</span><span class="sc10">F_CompreCollectCode</span><span class="sc0"> 
+            and </span><span class="sc10">F_StationCode</span><span class="sc5">=@</span><span class="sc10">F_StationCode</span><span class="sc12">)</span><span class="sc0">      
+    order by </span><span class="sc10">F_CollectDatetime</span><span class="sc0">  
+    
+</span><span class="sc5">----</span><span class="sc0">计算某个传感器的单循环的末阻力（</span><span class="sc10">KN</span><span class="sc0">）
+</span><span class="sc5">--============================@</span><span class="sc10">MZL1</span><span class="sc0">
+select top </span><span class="sc2">1</span><span class="sc0"> 
+    </span><span class="sc5">@</span><span class="sc10">MZL1</span><span class="sc5">=</span><span class="sc0">isnull</span><span class="sc12">((</span><span class="sc10">PI</span><span class="sc12">()</span><span class="sc5">*@</span><span class="sc10">TDGJ1</span><span class="sc5">*@</span><span class="sc10">TDGJ1</span><span class="sc5">*</span><span class="sc10">F_FirstChannelBore</span><span class="sc5">/</span><span class="sc2">4</span><span class="sc12">)</span><span class="sc5">/</span><span class="sc2">1000</span><span class="sc5">,</span><span class="sc2">0</span><span class="sc12">)</span><span class="sc0">     
+from </span><span class="sc10">TCompreCollectResistanceCycle1</span><span class="sc0">      
+    where </span><span class="sc10">F_CompreCollectCode</span><span class="sc5">=@</span><span class="sc10">F_CompreCollectCode</span><span class="sc0"> 
+    and  </span><span class="sc10">F_StationCode</span><span class="sc5">=@</span><span class="sc10">F_StationCode</span><span class="sc0">      
+    order by </span><span class="sc10">F_CollectDatetime</span><span class="sc0"> desc</span><span class="sc12">;</span><span class="sc0">   
+    
+</span><span class="sc5">--</span><span class="sc0">计算某个传感器的单循环的最大工作阻力（</span><span class="sc10">KN</span><span class="sc0">）      
+</span><span class="sc5">--============================@</span><span class="sc10">ZDGZZL1</span><span class="sc0">                        
+select 
+    </span><span class="sc5">@</span><span class="sc10">ZDGZZL1</span><span class="sc5">=</span><span class="sc0">isnull</span><span class="sc12">(</span><span class="sc0">max</span><span class="sc12">(</span><span class="sc10">PI</span><span class="sc12">()</span><span class="sc5">*@</span><span class="sc10">TDGJ1</span><span class="sc5">*@</span><span class="sc10">TDGJ1</span><span class="sc5">*</span><span class="sc10">F_FirstChannelBore</span><span class="sc5">/</span><span class="sc2">4</span><span class="sc12">)</span><span class="sc5">/</span><span class="sc2">1000</span><span class="sc5">,</span><span class="sc2">0</span><span class="sc12">)</span><span class="sc0">     
+    from </span><span class="sc10">TCompreCollectResistanceCycle1</span><span class="sc0">      
+    where </span><span class="sc10">F_CompreCollectCode</span><span class="sc5">=@</span><span class="sc10">F_CompreCollectCode</span><span class="sc0"> 
+    and  </span><span class="sc10">F_StationCode</span><span class="sc5">=@</span><span class="sc10">F_StationCode</span><span class="sc0">
+
+</span><span class="sc5">--==============================================================================</span><span class="sc0">
+</span><span class="sc5">--==============================================================================</span><span class="sc0">
+
+</span><span class="sc5">--</span><span class="sc0">计算初撑力（</span><span class="sc10">Mpa</span><span class="sc0">）  
+</span><span class="sc5">--============================@</span><span class="sc10">CCL1Mpa</span><span class="sc0">    
+select top </span><span class="sc2">1</span><span class="sc0"> 
+    </span><span class="sc5">@</span><span class="sc10">CCL1Mpa</span><span class="sc5">=</span><span class="sc10">F_FirstChannelBore</span><span class="sc0"> 
+    from </span><span class="sc10">TCompreCollectResistanceCycle1</span><span class="sc0">    
+        where </span><span class="sc10">F_CompreCollectCode</span><span class="sc5">=@</span><span class="sc10">F_CompreCollectCode</span><span class="sc0"> 
+        and  </span><span class="sc10">F_StationCode</span><span class="sc5">=@</span><span class="sc10">F_StationCode</span><span class="sc0">
+        and </span><span class="sc10">F_CollectDatetime</span><span class="sc5">&gt;</span><span class="sc0">
+            </span><span class="sc12">(</span><span class="sc0">select dateadd</span><span class="sc12">(</span><span class="sc0">minute</span><span class="sc5">,</span><span class="sc2">3</span><span class="sc5">,</span><span class="sc0">min</span><span class="sc12">(</span><span class="sc10">F_CollectDatetime</span><span class="sc12">))</span><span class="sc0">      
+            from </span><span class="sc10">TCompreCollectResistanceCycle1</span><span class="sc0">      
+                where </span><span class="sc10">F_CompreCollectCode</span><span class="sc5">=@</span><span class="sc10">F_CompreCollectCode</span><span class="sc0"> 
+                and </span><span class="sc10">F_StationCode</span><span class="sc5">=@</span><span class="sc10">F_StationCode</span><span class="sc12">)</span><span class="sc0">
+        order by </span><span class="sc10">F_CollectDatetime</span><span class="sc0">      
+</span><span class="sc5">--</span><span class="sc0">计算末阻力（</span><span class="sc10">Mpa</span><span class="sc0">）   
+</span><span class="sc5">--============================@</span><span class="sc10">MZL1Mpa</span><span class="sc0">   
+select top </span><span class="sc2">1</span><span class="sc0"> 
+    </span><span class="sc5">@</span><span class="sc10">MZL1Mpa</span><span class="sc5">=</span><span class="sc10">F_FirstChannelBore</span><span class="sc0"> 
+    from </span><span class="sc10">TCompreCollectResistanceCycle1</span><span class="sc0">    
+    where </span><span class="sc10">F_CompreCollectCode</span><span class="sc5">=@</span><span class="sc10">F_CompreCollectCode</span><span class="sc0"> 
+    and  </span><span class="sc10">F_StationCode</span><span class="sc5">=@</span><span class="sc10">F_StationCode</span><span class="sc0">
+    order by </span><span class="sc10">F_CollectDatetime</span><span class="sc0"> desc</span><span class="sc12">;</span><span class="sc0">      
+</span><span class="sc5">--</span><span class="sc0">计算最大阻力（</span><span class="sc10">Mpa</span><span class="sc0">） 
+</span><span class="sc5">--============================@</span><span class="sc10">ZDGZZL1Mpa</span><span class="sc0">     
+select </span><span class="sc5">@</span><span class="sc10">ZDGZZL1Mpa</span><span class="sc5">=</span><span class="sc0">max</span><span class="sc12">(</span><span class="sc10">F_FirstChannelBore</span><span class="sc12">)</span><span class="sc0">      
+    from </span><span class="sc10">TCompreCollectResistanceCycle1</span><span class="sc0">      
+    where </span><span class="sc10">F_CompreCollectCode</span><span class="sc5">=@</span><span class="sc10">F_CompreCollectCode</span><span class="sc0"> 
+    and  </span><span class="sc10">F_StationCode</span><span class="sc5">=@</span><span class="sc10">F_StationCode</span><span class="sc0">
+
+
+</span><span class="sc5">--==============================================================================</span><span class="sc0">
+</span><span class="sc5">--==============================================================================</span><span class="sc0">
+ </span><span class="sc5">--</span><span class="sc0">计算某个传感器的单循环的起始采集时间点和结束采集时间点  
+</span><span class="sc5">--============================@</span><span class="sc10">F_CollectDatetimeMin1</span><span class="sc0">
+</span><span class="sc5">--============================@</span><span class="sc10">F_CollectDatetimeMax1</span><span class="sc0">
+ 
+select 
+    </span><span class="sc5">@</span><span class="sc10">F_CollectDatetimeMin1</span><span class="sc5">=</span><span class="sc0">min</span><span class="sc12">(</span><span class="sc10">F_CollectDatetime</span><span class="sc12">)</span><span class="sc5">,</span><span class="sc0">      
+    </span><span class="sc5">@</span><span class="sc10">F_CollectDatetimeMax1</span><span class="sc5">=</span><span class="sc0">max</span><span class="sc12">(</span><span class="sc10">F_CollectDatetime</span><span class="sc12">)</span><span class="sc0">       
+    from </span><span class="sc10">TCompreCollectResistanceCycle1</span><span class="sc0">       
+        where </span><span class="sc10">F_CompreCollectCode</span><span class="sc5">=@</span><span class="sc10">F_CompreCollectCode</span><span class="sc0"> 
+        and  </span><span class="sc10">F_StationCode</span><span class="sc5">=@</span><span class="sc10">F_StationCode</span><span class="sc0">   
+</span><span class="sc5">--==============================================================================</span><span class="sc0">
+</span><span class="sc5">--==============================================================================</span><span class="sc0">
+</span><span class="sc5">--</span><span class="sc0">时间加权阻力（</span><span class="sc10">KN</span><span class="sc0">） 
+</span><span class="sc5">--</span><span class="sc0">时间加权阻力（</span><span class="sc10">Mpa</span><span class="sc0">）          
+</span><span class="sc5">--============================@</span><span class="sc10">PJZL1</span><span class="sc5">=@</span><span class="sc10">FenZi1</span><span class="sc5">/@</span><span class="sc10">FenMu1</span><span class="sc12">;</span><span class="sc0">         
+</span><span class="sc5">--============================@</span><span class="sc10">PJZL1Mpa</span><span class="sc5">=@</span><span class="sc10">FenZi1Mpa</span><span class="sc5">/@</span><span class="sc10">FenMu1Mpa</span><span class="sc12">;</span><span class="sc0">      
+set </span><span class="sc5">@</span><span class="sc10">FenZi1</span><span class="sc5">=@</span><span class="sc10">FenZi1</span><span class="sc5">+</span><span class="sc0">isnull</span><span class="sc12">(((</span><span class="sc10">PI</span><span class="sc12">()</span><span class="sc5">*@</span><span class="sc10">TDGJ1</span><span class="sc5">*@</span><span class="sc10">TDGJ1</span><span class="sc5">*@</span><span class="sc10">TDZPrev1</span><span class="sc5">/</span><span class="sc2">4</span><span class="sc12">)</span><span class="sc5">/</span><span class="sc2">1000</span><span class="sc5">+</span><span class="sc0"> 
+            </span><span class="sc12">(</span><span class="sc10">PI</span><span class="sc12">()</span><span class="sc5">*@</span><span class="sc10">TDGJ1</span><span class="sc5">*@</span><span class="sc10">TDGJ1</span><span class="sc5">*@</span><span class="sc10">TDZCur1</span><span class="sc5">/</span><span class="sc2">4</span><span class="sc12">)</span><span class="sc5">/</span><span class="sc2">1000</span><span class="sc12">)</span><span class="sc5">/</span><span class="sc0">
+          </span><span class="sc12">(</span><span class="sc2">2</span><span class="sc5">*</span><span class="sc10">DateDiff</span><span class="sc12">(</span><span class="sc0">s</span><span class="sc5">,@</span><span class="sc10">TimeCur1</span><span class="sc5">,@</span><span class="sc10">TimePrev1</span><span class="sc12">))</span><span class="sc5">,</span><span class="sc2">0</span><span class="sc12">);</span><span class="sc0">      
+set </span><span class="sc5">@</span><span class="sc10">FenMu1</span><span class="sc5">=@</span><span class="sc10">FenMu1</span><span class="sc5">+</span><span class="sc10">DateDiff</span><span class="sc12">(</span><span class="sc0">s</span><span class="sc5">,@</span><span class="sc10">TimeCur1</span><span class="sc5">,@</span><span class="sc10">TimePrev1</span><span class="sc12">);</span><span class="sc0"> 
+     
+</span><span class="sc5">--</span><span class="sc10">Mpa</span><span class="sc0">      
+set </span><span class="sc5">@</span><span class="sc10">FenZi1Mpa</span><span class="sc5">=@</span><span class="sc10">FenZi1Mpa</span><span class="sc0">
+    </span><span class="sc5">+</span><span class="sc0">isnull</span><span class="sc12">((</span><span class="sc5">@</span><span class="sc10">TDZPrev1</span><span class="sc5">+@</span><span class="sc10">TDZCur1</span><span class="sc12">)</span><span class="sc5">/</span><span class="sc12">(</span><span class="sc2">2</span><span class="sc5">*</span><span class="sc10">DateDiff</span><span class="sc12">(</span><span class="sc0">s</span><span class="sc5">,@</span><span class="sc10">TimeCur1</span><span class="sc5">,@</span><span class="sc10">TimePrev1</span><span class="sc12">))</span><span class="sc5">,</span><span class="sc2">0</span><span class="sc12">);</span><span class="sc0">      
+
+set </span><span class="sc5">@</span><span class="sc10">FenMu1Mpa</span><span class="sc5">=@</span><span class="sc10">FenMu1Mpa</span><span class="sc5">+</span><span class="sc10">DateDiff</span><span class="sc12">(</span><span class="sc0">s</span><span class="sc5">,@</span><span class="sc10">TimeCur1</span><span class="sc5">,@</span><span class="sc10">TimePrev1</span><span class="sc12">);</span><span class="sc0">  
+
+print </span><span class="sc1">'说明不是第一条记录'</span><span class="sc12">;</span><span class="sc0">      
+</span><span class="sc5">--</span><span class="sc0">时间加权阻力（</span><span class="sc10">KN</span><span class="sc0">）         
+set </span><span class="sc5">@</span><span class="sc10">PJZL1</span><span class="sc5">=@</span><span class="sc10">FenZi1</span><span class="sc5">/@</span><span class="sc10">FenMu1</span><span class="sc12">;</span><span class="sc0">      
+</span><span class="sc5">--</span><span class="sc0">时间加权阻力（</span><span class="sc10">Mpa</span><span class="sc0">）      
+set </span><span class="sc5">@</span><span class="sc10">PJZL1Mpa</span><span class="sc5">=@</span><span class="sc10">FenZi1Mpa</span><span class="sc5">/@</span><span class="sc10">FenMu1Mpa</span><span class="sc12">;</span></div></body>
+</html>
