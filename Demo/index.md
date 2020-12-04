@@ -6,7 +6,7 @@
 [3.二进制转换工具](https://tool.lu/hexconvert/)  
 [4.搜狗输入法功能介绍](https://pinyin.sogou.com/help.php?list=3&q=8)
 ### 第三课-我们的计算机
-参考内容  
+参考内容
 [1.CAD官网](https://www.autodesk.com.cn/)
 [2.历史价格曲线](http://www.lsjgcx.com/)   
 硬件参考内容   
@@ -35,9 +35,9 @@
 [键盘原理自制科普](https://www.bilibili.com/video/BV1bW41157UN/?spm_id_from=333.788.videocard.1)  
 [光机鼠标拆解](https://item.taobao.com/item.htm?spm=a230r.1.14.27.1528290extzI2v&id=547430557338&ns=1&abbucket=11#detail)  
 ### 第八课-计算机操作系统
-[常见的计算机系统](https://www.bilibili.com/video/BV1RW411j7sc?from=search&seid=8107480949077615012)
-[BIOS界面参考中英文对照](https://zhuanlan.zhihu.com/p/99825110)
-[计算机启动顺序](http://www.ruanyifeng.com/blog/2013/02/booting.html)
+[常见的计算机系统](https://www.bilibili.com/video/BV1RW411j7sc?from=search&seid=8107480949077615012)  
+[BIOS界面参考中英文对照](https://zhuanlan.zhihu.com/p/99825110)  
+[计算机启动顺序](http://www.ruanyifeng.com/blog/2013/02/booting.html)  
 [POST加电自检，常见错误](https://blog.csdn.net/u013009575/article/details/18881825/)  
 ### 第九课-重装操作系统
 [Windows下载站](https://msdn.itellyou.cn/)  
@@ -77,7 +77,7 @@
 [网络安全](https://www.bilibili.com/video/BV1nx411Z75W?p=5)  
 [网络安全](https://www.bilibili.com/video/BV1x7411h7DQ?from=search&seid=10546791355645319191)  
 ### 第二十二课-总复习
-
+![命名](image/课程内容回顾.png)
 
 
 
