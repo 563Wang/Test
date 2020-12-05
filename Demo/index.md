@@ -78,7 +78,7 @@
 [网络安全](https://www.bilibili.com/video/BV1nx411Z75W?p=5)  
 [网络安全](https://www.bilibili.com/video/BV1x7411h7DQ?from=search&seid=10546791355645319191)  
 ### 第二十二课-总复习
-![命名](image/课程内容回顾.png)
+
 
 
 
