@@ -22,7 +22,7 @@
     - [第二十一课-文件的使用](#第二十一课-文件的使用)
     - [第二十二课-总复习](#第二十二课-总复习)
 
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
 
 # 课程参考资料
 ### 第一课-什么是信息
@@ -106,7 +106,7 @@
 ![命名](image/课程内容回顾.png)
 
 
-<span id="jump">跳转处</span>
+[时间](image/a.md)
 
 
 
@@ -114,5 +114,5 @@
 
 
 
-
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
