@@ -8,7 +8,7 @@
 [4.搜狗输入法功能介绍](https://pinyin.sogou.com/help.php?list=3&q=8)
 ## 第三课-我们的计算机
 参考内容  
-[1.CAD官网](https://www.autodesk.com.cn/)
+[1.CAD官网](https://www.autodesk.com.cn/)  
 [2.历史价格曲线](http://www.lsjgcx.com/)   
 硬件参考内容   
 [1.硬件榜单](http://rank.kkj.cn/)  
